@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:4.2.8-bionic
+    ports:
+      - ${MONGO_HOST_PORT}:${MONGO_PORT}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: ${TYPEORM_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${TYPEORM_PASSWORD}
+    ports:
+      - ${TYPEORM_HOST_PORT}:${TYPEORM_PORT}
+  app:
+    tty: true
+    stdin_open: true
+    build: ./docker/app
+    ports:
+      - ${NEST_HOST_PORT}:${PORT}
+    depends_on:
+      - mongo
+      - mysql
+    volumes:
+      - .:/app
