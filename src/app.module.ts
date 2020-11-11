@@ -29,11 +29,11 @@ import { APP_FILTER } from '@nestjs/core'
   ],
   controllers: [AppController],
   providers: [
-    AppService
-    // {
-    //   provide: APP_FILTER,
-    //   useClass: HttpErrorFilter
-    // }
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: HttpErrorFilter
+    }
   ]
 })
 export class AppModule {}

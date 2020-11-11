@@ -13,7 +13,6 @@ export class AuthService {
       .createQueryBuilder()
       .andWhere('id = :id', { id })
       .getOne()
-    console.log(user)
     if (!user) throw new NotFoundEntityException()
     return user
   }

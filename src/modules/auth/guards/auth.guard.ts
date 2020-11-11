@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, Injectable, Logger } from '@nestjs/common'
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { AuthService } from '../auth.service'
 import { UserEntity } from '../../../entities/User.entity'
 import { Request } from 'express'
